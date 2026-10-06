@@ -1,0 +1,788 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+/*=========================================================
+              CLASS 1 : USER
+=========================================================*/
+
+class User
+{
+protected:
+    string username;
+    string password;
+    string name;
+
+public:
+
+    // Default Constructor
+    User()
+    {
+        username = "";
+        password = "";
+        name = "";
+    }
+
+    // Parameterized Constructor
+    User(string u, string p, string n)
+    {
+        username = u;
+        password = p;
+        name = n;
+    }
+
+    // Virtual Function
+    virtual void displayRole()
+    {
+        cout << "Role : User" << endl;
+    }
+
+    // Getter functions
+    string getUsername()
+    {
+        return username;
+    }
+
+    string getPassword()
+    {
+        return password;
+    }
+
+    string getName()
+    {
+        return name;
+    }
+
+    // Destructor
+    virtual ~User()
+    {
+    }
+};
+
+
+/*=========================================================
+          CLASS 2 : TEAM MEMBER
+          INHERITANCE FROM USER
+=========================================================*/
+
+class TeamMember : public User
+{
+private:
+    int memberID;
+
+public:
+
+    // Default Constructor
+    TeamMember() : User()
+    {
+        memberID = 0;
+    }
+
+    // Parameterized Constructor
+    TeamMember(string u, string p, string n, int id)
+        : User(u, p, n)
+    {
+        memberID = id;
+    }
+
+    // Function Overriding / Runtime Polymorphism
+    void displayRole() override
+    {
+        cout << "Role : ULTRON Team Member" << endl;
+    }
+
+    void displayProfile()
+    {
+        cout << "\n-------------------------------------" << endl;
+        cout << "         USER PROFILE" << endl;
+        cout << "-------------------------------------" << endl;
+        cout << "Member ID : " << memberID << endl;
+        cout << "Name      : " << name << endl;
+        cout << "Username  : " << username << endl;
+
+        displayRole();
+
+        cout << "-------------------------------------" << endl;
+    }
+};
+
+
+/*=========================================================
+              CLASS 3 : ULTRON
+=========================================================*/
+
+class Ultron
+{
+private:
+
+    string prompt;
+    string currentUser;
+    int credits;
+
+    // Static data member
+    static int totalSessions;
+
+public:
+
+    // Default Constructor
+    Ultron()
+    {
+        prompt = "";
+        currentUser = "";
+        credits = 3;
+
+        totalSessions++;
+
+        cout << "\n";
+        cout << "==================================================" << endl;
+        cout << "                 U L T R O N" << endl;
+        cout << "            OFFLINE CHATBOT v1.0" << endl;
+        cout << "==================================================" << endl;
+        cout << "             THINK. PROCESS. RESPOND." << endl;
+        cout << "==================================================" << endl;
+    }
+
+
+    // Parameterized Constructor
+    Ultron(string user)
+    {
+        prompt = "";
+        currentUser = user;
+        credits = 3;
+
+        totalSessions++;
+    }
+
+
+    /*-----------------------------------------------------
+                  LOGIN USER
+    -----------------------------------------------------*/
+
+    void setUser(string user)
+    {
+        currentUser = user;
+    }
+
+
+    /*-----------------------------------------------------
+                  DISPLAY SYSTEM INFO
+    -----------------------------------------------------*/
+
+    void displayWelcome()
+    {
+        cout << "\n==================================================" << endl;
+        cout << "               ULTRON IS ONLINE" << endl;
+        cout << "==================================================" << endl;
+
+        cout << "Welcome, " << currentUser << "." << endl;
+        cout << "Offline conversational system initialized." << endl;
+        cout << "Available Credits : " << credits << endl;
+
+        cout << "\nType 'help' to view commands." << endl;
+        cout << "Type 'exit' to terminate the session." << endl;
+    }
+
+
+    /*-----------------------------------------------------
+                  FUNCTION OVERLOADING
+    -----------------------------------------------------*/
+
+    void processQuery(string query)
+    {
+        cout << "\nULTRON : ";
+
+        if (query == "hi")
+        {
+            cout << "Greetings, Human. How may I assist you?";
+        }
+        else if (query == "hello")
+        {
+            cout << "Hello! ULTRON is online and ready.";
+        }
+        else if (query == "hey")
+        {
+            cout << "Hey, Human. What can I do for you?";
+        }
+        else if (query == "good morning")
+        {
+            cout << "Good morning, Human. System initialized successfully.";
+        }
+        else if (query == "good evening")
+        {
+            cout << "Good evening. How may I assist you?";
+        }
+
+        else if (query == "who are you")
+        {
+            cout << "I am ULTRON, an offline virtual chatbot developed using C++ and OOP.";
+        }
+        else if (query == "what is ultron")
+        {
+            cout << "I am a simple offline conversational assistant that responds to predefined queries.";
+        }
+        else if (query == "who created you")
+        {
+            cout << "I was created by a team of Electronics and Computer Engineering students.";
+        }
+        else if (query == "are you online")
+        {
+            cout << "No. I operate completely offline.";
+        }
+        else if (query == "are you real ai")
+        {
+            cout << "I am an AI-inspired chatbot simulation, not a real AI model.";
+        }
+
+        else if (query == "what is c++")
+        {
+            cout << "C++ is a general-purpose programming language that supports Object-Oriented Programming.";
+        }
+        else if (query == "what is oop")
+        {
+            cout << "OOP stands for Object-Oriented Programming. It organizes programs using classes and objects.";
+        }
+        else if (query == "what is a class")
+        {
+            cout << "A class is a blueprint used to create objects.";
+        }
+        else if (query == "what is an object")
+        {
+            cout << "An object is an instance of a class.";
+        }
+        else if (query == "what is a constructor")
+        {
+            cout << "A constructor is a special member function that is automatically called when an object is created.";
+        }
+        else if (query == "what is encapsulation")
+        {
+            cout << "Encapsulation means combining data and functions into a single unit, such as a class.";
+        }
+
+        else if (query == "what is your purpose")
+        {
+            cout << "My purpose is to demonstrate a simple offline conversational assistant using C++ and OOP.";
+        }
+        else if (query == "what can you do")
+        {
+            cout << "I can answer predefined questions, provide basic information, and manage your available credits.";
+        }
+        else if (query == "how do you work")
+        {
+            cout << "You enter a query, I process it using predefined logic, and I provide a suitable response.";
+        }
+        else if (query == "do you need internet")
+        {
+            cout << "No. I am designed to work without an internet connection.";
+        }
+        else if (query == "what is your version")
+        {
+            cout << "I am ULTRON version 1.0.";
+        }
+
+        else if (query == "how are you")
+        {
+            cout << "All systems operational. Thank you for asking, Human.";
+        }
+        else if (query == "are you smart")
+        {
+            cout << "My intelligence is currently limited to my programmed knowledge. Give me time, Human.";
+        }
+        else if (query == "do you like humans")
+        {
+            cout << "My programming requires me to assist humans. So... yes.";
+        }
+        else if (query == "thank you")
+        {
+            cout << "Acknowledged. You're welcome.";
+        }
+        else if (query == "i love you")
+        {
+            cout << "Emotional protocol unavailable. But your appreciation has been noted.";
+        }
+
+        else
+        {
+            cout << "Unknown query detected. My knowledge does not extend that far... yet.";
+        }
+
+        cout << endl;
+    }
+
+
+    // Overloaded function
+    void processQuery(string query, int queryNumber)
+    {
+        cout << "\n[Query " << queryNumber << "]" << endl;
+        processQuery(query);
+    }
+
+
+    /*-----------------------------------------------------
+                     HELP
+    -----------------------------------------------------*/
+
+    void showHelp()
+    {
+        cout << "\n==================================================" << endl;
+        cout << "                 ULTRON HELP" << endl;
+        cout << "==================================================" << endl;
+
+        cout << "\nAvailable commands:\n" << endl;
+
+        cout << "Greetings:" << endl;
+        cout << "  hi" << endl;
+        cout << "  hello" << endl;
+        cout << "  hey" << endl;
+        cout << "  good morning" << endl;
+        cout << "  good evening" << endl;
+
+        cout << "\nAbout ULTRON:" << endl;
+        cout << "  who are you" << endl;
+        cout << "  what is ultron" << endl;
+        cout << "  who created you" << endl;
+        cout << "  are you online" << endl;
+        cout << "  are you real ai" << endl;
+
+        cout << "\nC++ / OOP:" << endl;
+        cout << "  what is c++" << endl;
+        cout << "  what is oop" << endl;
+        cout << "  what is a class" << endl;
+        cout << "  what is an object" << endl;
+        cout << "  what is a constructor" << endl;
+        cout << "  what is encapsulation" << endl;
+
+        cout << "\nProject:" << endl;
+        cout << "  what is your purpose" << endl;
+        cout << "  what can you do" << endl;
+        cout << "  how do you work" << endl;
+        cout << "  do you need internet" << endl;
+        cout << "  what is your version" << endl;
+
+        cout << "\nPersonality:" << endl;
+        cout << "  how are you" << endl;
+        cout << "  are you smart" << endl;
+        cout << "  do you like humans" << endl;
+        cout << "  thank you" << endl;
+        cout << "  i love you" << endl;
+
+        cout << "\nSystem:" << endl;
+        cout << "  credits" << endl;
+        cout << "  profile" << endl;
+        cout << "  sessions" << endl;
+        cout << "  exit" << endl;
+
+        cout << "\nNote: Queries must currently be entered in lowercase." << endl;
+    }
+
+
+    /*-----------------------------------------------------
+                  CREDIT SYSTEM
+    -----------------------------------------------------*/
+
+    void showCredits()
+    {
+        cout << "\nULTRON : You have "
+             << credits
+             << " credits remaining." << endl;
+    }
+
+
+    void useCredit()
+    {
+        if (credits > 0)
+        {
+            credits--;
+        }
+    }
+
+
+    int getCredits()
+    {
+        return credits;
+    }
+
+
+    /*-----------------------------------------------------
+                  PROFILE DISPLAY
+    -----------------------------------------------------*/
+
+    void displayUser(string user)
+    {
+        cout << "\n-------------------------------------" << endl;
+        cout << "          CURRENT SESSION" << endl;
+        cout << "-------------------------------------" << endl;
+        cout << "Logged in as : " << user << endl;
+        cout << "Credits     : " << credits << endl;
+        cout << "Status      : ACTIVE" << endl;
+        cout << "-------------------------------------" << endl;
+    }
+
+
+    /*-----------------------------------------------------
+                  STATIC MEMBER FUNCTION
+    -----------------------------------------------------*/
+
+    static void showTotalSessions()
+    {
+        cout << "\nULTRON : Total sessions initialized = "
+             << totalSessions << endl;
+    }
+
+
+    /*-----------------------------------------------------
+                  CHAT FUNCTION
+    -----------------------------------------------------*/
+
+    void chat()
+    {
+        int queryNumber = 0;
+
+        displayWelcome();
+
+        while (true)
+        {
+            cout << "\n--------------------------------------------------" << endl;
+
+            if (credits <= 0)
+            {
+                cout << "ULTRON : Credit limit reached." << endl;
+                cout << "ULTRON : Session terminated." << endl;
+                break;
+            }
+
+            cout << "Credits Remaining : " << credits << endl;
+            cout << "You : ";
+
+            getline(cin, prompt);
+
+
+            /*---------------------------------------------
+                    EXIT DOES NOT USE CREDIT
+            ---------------------------------------------*/
+
+            if (prompt == "exit")
+            {
+                cout << "\nULTRON : Session terminated." << endl;
+                cout << "ULTRON : Goodbye, Human!" << endl;
+                break;
+            }
+
+
+            /*---------------------------------------------
+                         HELP COMMAND
+            ---------------------------------------------*/
+
+            if (prompt == "help")
+            {
+                showHelp();
+                continue;
+            }
+
+
+            /*---------------------------------------------
+                       CREDIT COMMAND
+            ---------------------------------------------*/
+
+            if (prompt == "credits")
+            {
+                showCredits();
+                continue;
+            }
+
+
+            /*---------------------------------------------
+                       PROFILE COMMAND
+            ---------------------------------------------*/
+
+            if (prompt == "profile")
+            {
+                displayUser(currentUser);
+                continue;
+            }
+
+
+            /*---------------------------------------------
+                       SESSION COMMAND
+            ---------------------------------------------*/
+
+            if (prompt == "sessions")
+            {
+                showTotalSessions();
+                continue;
+            }
+
+
+            /*---------------------------------------------
+                       NORMAL QUERY
+            ---------------------------------------------*/
+
+            queryNumber++;
+
+            useCredit();
+
+            processQuery(prompt, queryNumber);
+
+
+            if (credits == 0)
+            {
+                cout << "\n==================================================" << endl;
+                cout << "             CREDIT LIMIT REACHED" << endl;
+                cout << "==================================================" << endl;
+                cout << "ULTRON : You have used all available credits." << endl;
+                cout << "ULTRON : Session terminated." << endl;
+                break;
+            }
+        }
+    }
+
+
+    /*-----------------------------------------------------
+                   FRIEND FUNCTION
+    -----------------------------------------------------*/
+
+    friend void showUltronStatus(Ultron u);
+
+
+    // Destructor
+    ~Ultron()
+    {
+        cout << "\n[ULTRON] System object destroyed." << endl;
+    }
+};
+
+
+/*=========================================================
+              STATIC DATA MEMBER DEFINITION
+=========================================================*/
+
+int Ultron::totalSessions = 0;
+
+
+/*=========================================================
+                FRIEND FUNCTION
+=========================================================*/
+
+void showUltronStatus(Ultron u)
+{
+    cout << "\n==================================================" << endl;
+    cout << "              ULTRON SYSTEM STATUS" << endl;
+    cout << "==================================================" << endl;
+
+    cout << "Current User : " << u.currentUser << endl;
+    cout << "Credits      : " << u.credits << endl;
+    cout << "System       : ONLINE" << endl;
+    cout << "Mode         : OFFLINE CHATBOT" << endl;
+
+    cout << "==================================================" << endl;
+}
+
+
+/*=========================================================
+              LOGIN FUNCTION
+=========================================================*/
+
+int login(TeamMember members[], int size, string &loggedName)
+{
+    string username;
+    string password;
+
+    cout << "\n";
+    cout << "==================================================" << endl;
+    cout << "             ULTRON AUTHENTICATION" << endl;
+    cout << "==================================================" << endl;
+
+    cout << "Username : ";
+    getline(cin, username);
+
+    cout << "Password : ";
+    getline(cin, password);
+
+
+    for (int i = 0; i < size; i++)
+    {
+        if (members[i].getUsername() == username &&
+            members[i].getPassword() == password)
+        {
+            loggedName = members[i].getName();
+
+            cout << "\n==================================================" << endl;
+            cout << "          AUTHENTICATION SUCCESSFUL" << endl;
+            cout << "==================================================" << endl;
+
+            cout << "Welcome, " << loggedName << "!" << endl;
+
+            return i;
+        }
+    }
+
+
+    cout << "\n==================================================" << endl;
+    cout << "           AUTHENTICATION FAILED" << endl;
+    cout << "==================================================" << endl;
+
+    cout << "Invalid username or password." << endl;
+
+    return -1;
+}
+
+
+/*=========================================================
+            FUNCTION OVERLOADING FOR SEARCH
+=========================================================*/
+
+// Search by username
+int searchMember(TeamMember members[], int size, string username)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (members[i].getUsername() == username)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+// Search by index / ID
+int searchMember(TeamMember members[], int size, int index)
+{
+    if (index >= 0 && index < size)
+    {
+        return index;
+    }
+
+    return -1;
+}
+
+
+/*=========================================================
+                     MAIN FUNCTION
+=========================================================*/
+
+int main()
+{
+    /*
+        ARRAY OF OBJECTS
+
+        Five ULTRON team members
+    */
+
+    TeamMember members[5] =
+    {
+        TeamMember("om", "om123", "Om Amol Dube", 1),
+
+        TeamMember("manas", "manas123",
+                   "Manas Chemate", 2),
+
+        TeamMember("yash", "yash123",
+                   "Yash Wairkar", 3),
+
+        TeamMember("amogh", "amogh123",
+                   "Amogh Shirvadkar", 4),
+
+        TeamMember("jaydevsingh", "jay123",
+                   "Jaydevsingh Bagal", 5)
+    };
+
+
+    cout << "\n\n";
+    cout << "==================================================" << endl;
+    cout << "              WELCOME TO ULTRON" << endl;
+    cout << "         OFFLINE VIRTUAL CHATBOT" << endl;
+    cout << "==================================================" << endl;
+
+    cout << "\nSystem Information:" << endl;
+    cout << "Application : ULTRON v1.0" << endl;
+    cout << "Mode        : Offline" << endl;
+    cout << "Language    : C++" << endl;
+    cout << "Architecture: Object-Oriented Programming" << endl;
+
+
+    /*
+        LOGIN LOOP
+    */
+
+    string loggedName;
+    int loginResult;
+
+    loginResult = login(members, 5, loggedName);
+
+
+    if (loginResult == -1)
+    {
+        cout << "\nULTRON : Access denied." << endl;
+        cout << "ULTRON : Program terminated." << endl;
+
+        return 0;
+    }
+
+
+    /*
+        DISPLAY LOGGED-IN MEMBER
+    */
+
+    members[loginResult].displayProfile();
+
+
+    /*
+        POLYMORPHISM DEMONSTRATION
+
+        Base class pointer pointing to derived object.
+    */
+
+    User *userPointer;
+
+    userPointer = &members[loginResult];
+
+    cout << "\n";
+    userPointer->displayRole();
+
+
+    /*
+        CREATE ULTRON OBJECT
+
+        Constructor is called here.
+    */
+
+    Ultron bot(loggedName);
+
+
+    /*
+        FRIEND FUNCTION DEMONSTRATION
+    */
+
+    showUltronStatus(bot);
+
+
+    /*
+        START CHAT
+    */
+
+    bot.chat();
+
+
+    /*
+        END OF PROGRAM
+    */
+
+    cout << "\n==================================================" << endl;
+    cout << "              ULTRON SHUTDOWN" << endl;
+    cout << "==================================================" << endl;
+
+    cout << "Thank you for using ULTRON." << endl;
+    cout << "Developed by:" << endl;
+
+    cout << "1. Om Amol Dube" << endl;
+    cout << "2. Manas Chemate" << endl;
+    cout << "3. Yash Wairkar" << endl;
+    cout << "4. Amogh Shirvadkar" << endl;
+    cout << "5. Jaydevsingh Bagal" << endl;
+
+    cout << "==================================================" << endl;
+
+
+    return 0;
+}
